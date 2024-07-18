@@ -9,7 +9,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // Update this based on your frontend URL
+    origin: "https://socket-frontend-eta.vercel.app", // Update this based on your frontend URL
     methods: ["GET", "POST"],
   },
 });
