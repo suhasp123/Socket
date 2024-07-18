@@ -38,7 +38,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://reactfrontend-fgww.onrender.com/",
+    origin: "https://techcartfrontend.vercel.app/",
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true,
