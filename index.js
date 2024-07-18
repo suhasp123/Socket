@@ -1,34 +1,36 @@
-const express=require("express");
-const app=express();
-const cors=require("cors")
-const http=require("http");
-const {Server} = require("socket.io")
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const http = require("http");
+const { Server } = require("socket.io");
 
 app.use(cors());
-const server=http.createServer(app);
+const server = http.createServer(app);
 
-const io=new Server(server,{
-    cors:{
-        origin:"http://localhost:3000",
-      
-    }
-})
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000", // Ensure this is correct based on your frontend URL
+    methods: ["GET", "POST"],
+  },
+});
 
+app.get("/test", (req, res) => {
+  res.json({ message: "working" });
+});
 
-app.get('/test',(req,res)=>{
-    res.json({message:"working"});
-})
+io.on("connection", (socket) => {
+  console.log("a user connected");
 
+  socket.on("message", (data) => {
+    console.log("message received:", data);
+    socket.broadcast.emit("received", data);
+  });
 
-io.on('connection',(socket)=>{
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
+});
 
-    
-      socket.on("message",(data)=>{
-           socket.broadcast.emit("recieved",data)
-      })
-})
-
-server.listen(3001,()=>{
-    console.log("server is running")
-})
-
+server.listen(3001, () => {
+  console.log("server is running on port 3001");
+});
