@@ -15,8 +15,8 @@ const io=new Server(server,{
 })
 
 
-app.get('/',(req,res)=>{
-    res.json("BAckend is Working")
+app.get('/test',(req,res)=>{
+    res.json({message:"working"});
 })
 
 
