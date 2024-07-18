@@ -1,20 +1,20 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
 
+const app = express();
 app.use(cors());
+
 const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["https://socket-frontend-eta.vercel.app","http://localhost:3000" ],// Update this based on your frontend URL
+    origin: ["https://techcartfrontend.vercel.app", "http://localhost:3000"],
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true,
   },
-  transports: ["websocket"],
 });
 
 app.get("/test", (req, res) => {
@@ -22,7 +22,7 @@ app.get("/test", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  console.log("a user connected", socket.id);
 
   socket.on("message", (data) => {
     console.log("message received:", data);
@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    console.log("user disconnected", socket.id);
   });
 });
 
