@@ -15,6 +15,11 @@ const io=new Server(server,{
 })
 
 
+app.get('/',(req,res)=>{
+    res.send("BAckend is Working")
+})
+
+
 io.on('connection',(socket)=>{
 
     
