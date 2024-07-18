@@ -4,7 +4,7 @@ const TemporaryTableSchema = new mongoose.Schema({
   product_id: { type:String, required: true },
   Product: { type: String, required: true },
   Price: { type: String, required: true },
-  imageFile:{type:String,required:true},
+  imageFile:{type:String},
   tag_id:{type:[String],require:true},
   Quantity:{type:Number,require:true},
   

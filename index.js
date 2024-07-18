@@ -133,7 +133,7 @@ io.on("connection", (socket) => {
          console.log("hello");
 
          const newItem = await Inventory.findOne({ product_id: product_id });
-
+         console.log(newItem)
          if (!newItem || newItem.length === 0) {
            return res.status(404).json({ error: "Item not found" });
          }
