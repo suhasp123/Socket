@@ -9,9 +9,12 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://socket-frontend-eta.vercel.app", // Update this based on your frontend URL
+    origin: ["https://socket-frontend-eta.vercel.app","http://localhost:3000" ],// Update this based on your frontend URL
     methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true,
   },
+  transports: ["websocket"],
 });
 
 app.get("/test", (req, res) => {
