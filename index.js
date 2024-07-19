@@ -122,9 +122,11 @@ io.on("connection", (socket) => {
        }
      } else {
        const itemIndex = existingCart.items.findIndex(
-         (existingItem) => existingItem.product_id === Number(product_id)
-       );
+         (existingItem) => existingItem.product_id === product_id
+         
 
+       );
+       console.log("Product matches",itemIndex);
        if (itemIndex !== -1) {
          // If product_id is present, increment the quantity
          existingCart.items[itemIndex].tag_id.push(tag_id);
